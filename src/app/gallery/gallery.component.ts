@@ -10,22 +10,36 @@ import { Subject } from 'rxjs';
   encapsulation:ViewEncapsulation.None
 })
 export class GalleryComponent implements OnInit,OnDestroy  {
+  p: number = 1;
 
   products;
   searchText;
+  pagination;
   constructor(private giphy: GiphyService) { }
   destroy$: Subject<boolean> = new Subject<boolean>();
   filter={
   query:'',
+  offset:0,
   limit:20
 }
   ngOnInit(): void {
-    this.giphy.getGif(this.filter).pipe(takeUntil(this.destroy$)).subscribe((data: any[])=>{
-      debugger;
-      console.log(data);
-      this.products = data['data'];
-    });  
+   this.getGiphy(this.filter);
   }
+
+  paging(evnt){
+    debugger;
+    this.filter.offset=evnt;
+    this.getGiphy(this.filter);
+  }
+
+getGiphy(filter){
+  this.giphy.getGif(filter).pipe(takeUntil(this.destroy$)).subscribe((data: any[])=>{
+    debugger;
+    console.log(data);
+    this.products = data['data'];
+    this.pagination=data["pagination"];
+  });  
+}
 
   ngOnDestroy() {
     this.destroy$.next(true);

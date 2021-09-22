@@ -25,7 +25,7 @@ export class GiphyService {
   }
 
   public getGif(filter){
-    let options = { params: new HttpParams({fromString: `api_key=${this.api_key}&q=${filter.query}&limit=${filter.limit}`}) };
+    let options = { params: new HttpParams({fromString: `api_key=${this.api_key}&q=${filter.query}&limit=${filter.limit}&offset=${filter.offset}`}) };
     return this.http.get(`https://api.giphy.com/v1/gifs/trending`,options).pipe(retry(3),catchError(this.handleError));
   }
 }

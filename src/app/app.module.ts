@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {NgxPaginationModule} from 'ngx-pagination';
 import { GalleryComponent } from './gallery/gallery.component';
 
 @NgModule({
@@ -20,7 +21,8 @@ import { GalleryComponent } from './gallery/gallery.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
